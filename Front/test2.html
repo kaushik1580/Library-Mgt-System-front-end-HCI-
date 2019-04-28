@@ -1,0 +1,50 @@
+<html>
+	<head>
+	<style>
+		.book-bg{
+				position: relative;
+				width: 200px;
+				height: 324px;
+				margin: 100px auto;
+				background-color: #F0F0F0;
+				background-size : cover;
+				transform-style: preserve-3d;
+				perspective: 500px;
+			}
+			
+			.cover{
+				position: absolute;
+				width:100%;
+				height: 100%;
+				background: url('book1.jpg') no-repeat;
+				background-size: cover;
+				transform-origin: 0 50%;
+				transition: all 0.8s ease;
+			}
+			.book-bg:hover .cover{
+				transform: rotateY(-80deg);
+			}
+			book-bg:hover {
+				transform: rotateY(40deg);
+			}
+			#second_division{
+				display: block;
+				position: relative;
+				top: 30%;
+				left: 40%;
+				height:325px;
+				width:210px;
+				background-color: blue;
+			}
+	</style>
+	</head>
+	<body>
+		<div id='second_division'>
+			<div class="book-bg">
+				<div class="cover" style='background: url("book.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		
+		</div>
+	</body>
+</html>

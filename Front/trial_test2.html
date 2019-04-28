@@ -1,0 +1,514 @@
+<html>
+	<head>
+		<title>Library Front End</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style type="text/css">
+			#title_bg{
+			background-color:white;
+			height:60px;
+			width:100%;
+		}
+		.desk_bg{
+			background: linear-gradient(#2B1F19, #5F3A27);
+			width:100%;
+			height:324px;
+			display: block;
+			padding: 0px;
+			margin-left:0px;
+			transform: rotateY(2deg);
+		}
+		.border_shelf{
+			background-color: black;
+			width: 100.4%;
+			height: 30px;
+			position:relative;
+			left:-4px;
+			top:-2px;
+			padding:0px;
+			margin-left:0px;
+			border:0px;
+			transform: rotateY(2deg);
+		}
+		* {
+				margin : 0;
+				padding : 0;
+			}
+			.book-bg{
+				position: relative;
+				width: 200px;
+				height: 324px;
+				float: left;
+				background-size : cover;
+				transform-style: preserve-3d;
+				perspective: 500px;
+			}
+			
+			.cover{
+				position: absolute;
+				width:100%;
+				height: 100%;
+				-webkit-box-reflect:below 0px
+				-webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(90%, transparent), to(rgba(250, 250, 250, 0.6)));
+				transform-origin: 0 50%;
+				transform: rotateY(40deg);
+				transition: all 0.8s ease;
+			}
+			.book-bg:hover .cover {
+				transform: rotateY(0deg);
+			}
+			book-bg:hover {
+				transform: rotateY(40deg);
+				
+			}
+				
+			#second_division{
+				display: none;
+				position: fixed;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				height:486px;
+				width:300px;
+				background-attachment: fixed;
+			}
+			#book-bg_1{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				background-color: #F0F0F0;
+				background-size : cover;
+				transform-style: preserve-3d;
+				perspective: 500px;
+			}
+			#cover_1{
+				position: absolute;
+				width:100%;
+				height: 100%;
+				background: url('book1.jpg') no-repeat;
+				background-size: cover;
+				transform-origin: 0 50%;
+				transition: all 0.8s ease;
+			}
+			book-bg_1:hover cover_1{
+				transform: rotateY(-75deg);
+			}
+			.blur{
+				filter: blur(10px);
+				-webkit-filter: blur(10px);
+			}
+			#back{
+				background-color:red;
+				height:20px;
+				width:20px;
+			}
+			#cancel{
+				position:relative;
+				top: -13px;
+				left:320px;
+				width:30px;
+				height:30px;
+			}
+			#cancel:hover{
+				background-color:white;
+			}
+			
+			body {
+					background-color: #DEE3D6;
+		}
+		h1 {
+			font-family:'Baron Nueue';
+			font-size: 400%;
+			text-align: center;
+		}
+		h2{
+			font-family:'Baron Nueue';
+			font-size: 200%;
+			text-align: center;
+		}
+		h3{
+			text-align:center;
+			position:relative;
+			top: 100%;
+		}
+		.menus{
+			width:100%;
+			height:70%;
+		}
+		.cards{
+			width:120px;
+			height:120px;
+			float:left;
+			margin:10px;
+		}
+		.cards:hover{
+			box-shadow:0px 0px 10px 0px #888888;
+		}
+		#form_position{
+				position:absolute;
+				top:40%;
+				left:14%;
+				width:70%;
+				height:200px;
+				display:block;
+				box-shadow:0px 0px 10px 0px #888888;
+			}
+			.btn-primary{
+				padding: 5px;
+				width:100px;
+				border-radius: 10px;
+				position:absolute;
+				left: 27%;
+				top:59%;
+				background-color: #555555;
+				color: white;
+				border: none;
+			}
+			#main_positioning{
+				position:relative;
+				left:30%;
+				top:55px;
+			}
+			#label_position{
+				position:absolute;
+				left:37%;
+				top:5%;
+				
+			}
+			#issue{
+				position:absolute;
+				left: 16%;
+				top:33%;
+				border: none;
+				border-bottom:1px solid black;
+				background-color:#F0F0F0;
+				height:27px;
+				padding:3px;
+				
+			}
+			.btn-primary:hover{
+				box-shadow:0px 0px 10px 0px #888888;
+			}
+			input.issue1:focus {
+				outline-width:0;
+				box-shadow:0px 0px 10px 0px #888888;
+			}
+			.already_issued{
+				display:none;
+				position:absolute;
+				top:40%;
+				left:14%;
+				width:70%;
+				height:200px;
+				box-shadow:0px 0px 10px 0px #888888;	
+			}
+			#attention{
+				position:absolute;
+				top:30%;
+				left:20%;
+			}
+			.btn-primary1{
+				padding: 5px;
+				width:100px;
+				border-radius: 10px;
+				position:absolute;
+				left: 27%;
+				top: 68%;
+				background-color: #555555;
+				color: white;
+				border: none;
+				font-family:'Arial';
+			}
+			#cover_div{
+				display: none;
+			}
+	</style>
+	<script>
+		function openFunction(a){
+			//alert (a);
+			//alert('Hello! Entered Inside!');
+			var index = parseInt(a);
+			document.getElementById('second_division').style.display = "block";
+			var main_div = document.getElementById('rest');
+			main_div.setAttribute('class', 'blur');
+			var image = document.getElementsByClassName("cover")[index];
+			//alert(image);
+			var check = image.style.backgroundImage;
+			//alert(check);
+			var second_division_image = document.getElementById('cover_1');
+			second_division_image.style.backgroundImage = check;
+		}
+		function closeBook(){
+			var main_div = document.getElementById('rest');
+			document.getElementById('second_division').style.display = "none";
+			main_div.removeAttribute('class', 'blur');
+		}
+		function openrotate(){
+			var cover = document.getElementById('cover_1');
+			cover.style.transform = "rotateY(-80deg)";
+			setTimeout(function(){
+			var cover_div = document.getElementById('cover_div');
+			cover_div.style.display = "block";
+			}, 500);
+			
+		}
+		function closeBook1(){
+			var cover_div = document.getElementById('cover_div');
+			cover_div.style.display = "none";
+			var cover = document.getElementById('cover_1')
+			cover.style.transform = "rotateY(0deg)";
+			
+		}
+	</script>
+	</head>
+	<body>
+		<!--<h1 onmouseover='closeBook1()'>
+			BOOKS' CORNER
+		</h1>-->
+	<div id='rest' onmouseover='closeBook1()'>
+	<!--<div id='upper_content' onclick='closeBook()'>
+		<div>
+			<br><br>
+			<div>
+				<img style='float:left; height:100px; width:80px; margin-left:10px;' src='C:\Users\Admin\Desktop\HCI_Project\Harsh Photos\Stephen_Fry.jpg' alt='Stephen_Fry' />
+				<p style='float:left; font-family:"Moderne Sans"; margin-left:10px; font-size:150%;'>"An original idea. That can’t be too hard. The library must be full of them."</p>
+			</div>
+			<div style='clear:both;'>
+			</div>
+			<div>
+				<img style='float:right; height:100px; width:80px; margin-right:10px;' src='C:\Users\Admin\Desktop\HCI_Project\Harsh Photos\Carlos_Maria.jpg' alt='Carlos_Maria' />
+				<p style='float:right; font-family:"Moderne Sans"; margin-right:10px; font-size:150%;'> "To build up a library is to create a life. It’s never just a random collection of books."</p>
+			</div>
+			<div style='clear:both;'>
+			</div>
+			<div>
+				<img style='float:left; height:100px; width:80px; margin-left:10px;' src='C:\Users\Admin\Desktop\HCI_Project\Harsh Photos\Albert_Einstein.jpg' alt='Albert_Einstein' />
+				<p style='float:left; font-family:"Moderne Sans"; margin-left:10px; font-size:150%;'> "The only thing that you absolutely have to know, is the location of the library."</p>
+			</div>
+			<div style='clear:both;'>
+			</div>
+			<div>
+				<img style='float:right; height:100px; width:80px; margin-right:10px;' src='C:\Users\Admin\Desktop\HCI_Project\Harsh Photos\Anne_Hebert.jpg' alt='Anne_Herbert' />
+				<p style='float:right; font-family:"Moderne Sans"; margin-right:10px; font-size:150%;'> "Libraries will get you through times of no money better than money will get you through times of no libraries."</p>
+			</div>
+			<div style='clear:both'>
+			</div>
+			<div>
+				<img style='float:left; height:100px; width:80px; margin-left:10px;' src='C:\Users\Admin\Desktop\HCI_Project\Harsh Photos\Paula_Poundstone.jpg' alt='Paula_Poundstone' />
+				<p style='float:left; font-family:"Moderne Sans"; margin-left:10px; font-size:150%;'> "The truth is libraries are raucous clubhouses for free speech, controversy and community."</p>
+			</div>
+			<div style='clear:both;'>
+			</div>
+			<div>
+				<img style='float:right; height:100px; width:80px; margin-right:10px;' src='C:\Users\Admin\Desktop\HCI_Project\Harsh Photos\Sarah_Maas.jpg' alt='Sarah_Maas' />
+				<p style='float:right; font-family:"Moderne Sans"; margin-right:10px; font-size:150%;'> "Libraries were full of ideas – perhaps the most dangerous and powerful of all weapons."</p>
+			</div>
+			<div style='clear:both;'>
+			</div>
+		</div>
+		<h2>DASHBOARD: HOT PICKS</h2>
+	</div>-->
+		<div class="desk_bg">
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(0)'  style='background: url("book1.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(1)' style='background: url("book.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(2)' style='background: url("book2.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(3)' style='background: url("book3.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(4)' style='background: url("book4.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(5)' style='background: url("book5.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(6)' style='background: url("book6.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		</div>
+		
+		<div class="border_shelf" onclick='closeBook()'>
+		</div>
+		<div class="desk_bg">
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(7)' style='background: url("book8.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(8)' style='background: url("book9.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(9)' style='background: url("book10.jpg") no-repeat; background-size:cover;'>
+				</div>
+			</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(10)' style="background: url('book11.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(11)' style="background: url('book7.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(12)' style="background: url('book12.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(13)' style="background: url('book13.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		</div>
+		<div class="border_shelf" onclick='closeBook()'>
+		</div>
+		<div class="desk_bg">
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(14)' style="background: url('book14.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(15)' style="background: url('book15.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(16)' style="background: url('book16.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(17)' style="background: url('book17.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(18)' style="background: url('book18.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(19)' style="background: url('book19.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(20)' style="background: url('book20.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		
+		</div>
+		<div class="border_shelf" onclick='closeBook()'>
+		</div>
+		<div class="desk_bg">
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(21)' style="background: url('book21.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(22)' style="background: url('book22.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(23)' style="background: url('book23.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(24)' style="background: url('book24.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(25)' style="background: url('book25.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(26)' style="background: url('book26.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		<div class="book-bg">
+				<div class="cover" onclick='openFunction(27)' style="background: url('book27.jpg') no-repeat; background-size: cover;">
+				</div>
+		</div>
+		
+		
+		</div>
+		<div class="border_shelf" onclick='closeBook()'>
+		</div>
+	</div>
+	<!--<div class='menus' onmouseover='closeBook1()'>
+		<h2>CATEGORIES</h2>
+		<div class='cards' style='background: url("sports.png") no-repeat; background-size:cover;'>
+		</div>
+		<div class='cards' style='background: url("computer_science.png") no-repeat; background-size:cover;'>
+		</div>
+		<div class='cards' style='background: url("Music.png") no-repeat; background-size: cover;'>
+		</div>
+		<div class='cards' style='background: url("physics.png") no-repeat; background-size: cover;'>
+		</div>
+		<div class='cards' style='background: url("Maths.png") no-repeat; background-size: cover;'>
+		</div>
+		<div class='cards' style='background: url("motherboard.png") no-repeat; background-size: cover;'>
+		</div>
+		<div class='cards' style='background: url("electronics.png") no-repeat; background-size: cover;'>
+		</div>
+		<div class='cards' style='background: url("android.png") no-repeat; background-size: cover;'>
+		</div>
+		<div class='cards' style='background: url("chemistry.png") no-repeat; background-size: cover;'>
+		</div>
+	</div>-->
+	<div id='second_division' onmouseleave='closeBook1()'>
+			<div id='cancel'>
+			<img src='Cancel.png' onclick='closeBook()' />
+			</div>
+			<div id="book-bg_1" onmouseleave='closeBook1()'>
+				<div id='cover_1' onmouseover='openrotate()'>
+				</div>
+				<div id='cover_div'>
+				<img id='main_positioning' src='Reading_logo.png' />
+				<br>
+				<form id='form_position'>
+				<img src='contact.png' id='label_position' >
+				<input type='text' id='issue' name='issue' class='issue1' placeholder='Registration Number..' />
+				<br>
+				<br>
+				<button type='button' class='btn-primary' onclick='checkfunction()'> ISSUE
+				</button>
+				</form>
+				<div class='already_issued'>
+					<br>
+					<img src='not_available.png' id='label_position' >
+					<h3 id='attention'>ATTENTION!</h3>
+					<br><br>
+					<p style='position:absolute; top:44%;'> Book is not available in library!</p>
+					<br>
+					<p style='position:absolute; top:52%;'> Please check after some time </p>
+					<button class='btn-primary1' onclick='closeBook()'>CLOSE</button>
+				</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	
+	</body>
+</html>
