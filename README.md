@@ -16,7 +16,7 @@ The above pic is the mobile-version of the project
 
 The above pic is the web-version of the project.
 
-
+![3](https://user-images.githubusercontent.com/37845653/71915278-690a4d80-31a1-11ea-94c3-00e9ca7b893f.JPG)
 
 The above pic is the home page of the project. There are some 3-d animations added to the signup and the login divisions.
 
