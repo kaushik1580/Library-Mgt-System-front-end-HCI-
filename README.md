@@ -1,4 +1,4 @@
-Library-Mgt-System-front-end-3d-HCI-
+Library-Mgt-System-front-end-HCI-
 
 Here is a new method used for implementing Library Management System (front-end). It is done as a project for HCI.
 Languages: HTML, CSS, Javascript
