@@ -22,6 +22,6 @@ The above pic is the web-version of the project.
 
 The above pic is the home page of the project. There are some 3-d animations added to the signup and the login divisions.
 
-
+![5](https://user-images.githubusercontent.com/37845653/71915281-69a2e400-31a1-11ea-88d4-e809fa1e5b01.JPG)
 
 The signup and login page have been updated with validation in javascript.
